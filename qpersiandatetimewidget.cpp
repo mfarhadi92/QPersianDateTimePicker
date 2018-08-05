@@ -14,7 +14,7 @@ QPersianDateTimeWidget::QPersianDateTimeWidget(QWidget *parent) :
     ui(new Ui::QPersianDateTimeWidget)
 {
     ui->setupUi(this);
-//    setWindowFlags(windowFlags()|Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint);
+    //    setWindowFlags(windowFlags()|Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint);
     selectedPDateTime   = new QPersianDateTime(QDateTime::currentDateTime());
     tempPDateTime       = new QPersianDateTime(QDateTime::currentDateTime());
     dayBtnsGroup        = new QButtonGroup(this);
@@ -36,6 +36,13 @@ void QPersianDateTimeWidget::showEvent(QShowEvent *event)
     updateDate();
     updateTime();
     QWidget::showEvent(event);
+}
+
+void QPersianDateTimeWidget::resizeEvent(QResizeEvent *event)
+{
+    foreach(QPushButton* btn , ui->widget_numDays->findChildren<QPushButton*>() )
+        btn->setWhatsThis("");
+    QWidget::resizeEvent(event);
 }
 
 QPersianDateTime QPersianDateTimeWidget::getPDateTime()
@@ -102,7 +109,13 @@ void QPersianDateTimeWidget::updateDate()
         animation->setDuration(300);
         animation->setStartValue(QPointF((ui->widget_numDays->width()/2 + btn->pos().x() ) *.5 ,
                                          (ui->widget_numDays->height()/2 + btn->pos().y() ) *.5));
-        animation->setEndValue(btn->pos());
+        if( btn->whatsThis().isEmpty() || btn->whatsThis().split(",").count() != 2 )
+        {
+            btn->setWhatsThis(QString("%1,%2").arg(btn->pos().x()).arg(btn->pos().y()));
+            animation->setEndValue(btn->pos());
+        }
+        else
+            animation->setEndValue(QPointF(btn->whatsThis().split(",").first().toInt(),btn->whatsThis().split(",").last().toInt()));
         animation->start();
     }
     dayBtns_clicked(selectedPDateTime->getDay()+firstDayOfMonth-1);
