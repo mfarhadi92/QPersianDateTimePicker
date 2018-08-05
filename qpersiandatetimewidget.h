@@ -36,6 +36,7 @@ public:
     explicit QPersianDateTimeWidget(QWidget *parent = 0);
     ~QPersianDateTimeWidget();
     void showEvent(QShowEvent *event);
+    void resizeEvent(QResizeEvent *event);
     QPersianDateTime    getPDateTime();
     void    setPDateTime(QPersianDateTime dateTime);
     void    setFormat(QString format_){ format = format_; }
