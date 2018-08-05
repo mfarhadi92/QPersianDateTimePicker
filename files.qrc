@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>res/images/left_arrow.png</file>
+        <file>res/images/right_arrow.png</file>
+        <file>res/images/date.png</file>
+        <file>res/images/time.png</file>
+        <file>res/images/bottom_arrow.png</file>
+        <file>res/images/top_arrow.png</file>
+    </qresource>
+</RCC>
