@@ -1,6 +1,10 @@
 #-------------------------------------------------
 #
 # Project created by QtCreator 2018-07-10T14:43:27
+# Mehdi farhadi
+# mfarhadi.ece.iut.ac.ir
+# 09134223351
+# mfarhadiir@gmail.com
 #
 #-------------------------------------------------
 
